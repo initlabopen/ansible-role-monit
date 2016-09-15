@@ -15,3 +15,7 @@ monit_statefile: '{{ monit_lib }}/state'
 
 monit_http_bind: 'localhost'
 monit_http_port: 2812
+
+
+monitrc_conf: /etc/monit/monitrc
+monit_includes: /etc/monit/conf.d

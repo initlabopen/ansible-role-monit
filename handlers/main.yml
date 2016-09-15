@@ -1,11 +1,3 @@
 ---
-
-- name: Test monit and reload
-  command: monit -t
-  notify: [ 'Reload monit' ]
-
-- name: Reload monit
-  service:
-    name: 'monit'
-    state: 'reloaded'
-
+- name: restart monit
+  service: name=monit state=restarted
