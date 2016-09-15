@@ -28,3 +28,7 @@
     group: root
   with_items: monit_services
   notify: restart monit
+
+
+- name: Copy monitoring script
+  copy: src=highload-report.sh dest=/root/bin/hr/ owner=root mode=755
