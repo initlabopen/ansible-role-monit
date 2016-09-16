@@ -136,7 +136,7 @@ echo "</body></html>" >> /tmp/$STAMP.tmp
 
 if [ -n "$REPORT" ]; then
 cat - /tmp/$STAMP.tmp <<EOF | sendmail -oi -t
-To: y.malov@initlab.ru
+To: d.kochetov@initlab.ru
 Cc: r.agabekov@initlab.ru
 Subject: $SUBJECT
 Content-Type: text/html; charset=utf8
@@ -175,4 +175,3 @@ find /var/log/highload-report/ -type f -mtime +30 -delete
 #fi
 
 exit 1
-  
