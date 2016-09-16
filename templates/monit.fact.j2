@@ -3,7 +3,7 @@
 {% for service in monit_services %}
     "{{ service.name }}",
 {% endfor %}
-{% if monit_mail_enabled %}
+{% if monit_email_enable %}
     "mail",
 {% endif %}
     "webinterface"
