@@ -3,11 +3,11 @@
 
 - name: pkg - Install package
   apt:
-    name: monit
+    name: {{ item }}
     update_cache: yes
     cache_valid_time: 3600
     state: present
-
+  with_item: {{ monit_pkg }}
 - name: create includes folder
   file: path={{ monit_includes }} state=directory mode=0600
 
@@ -19,6 +19,34 @@
     group: root
     mode: 0700
   notify: restart monit
+
+- name: Check if php-fpm is running
+  shell: ps aux | grep php-fpm | grep -v grep
+  ignore_errors: yes
+  changed_when: false
+  register: service_phpfpm_status
+
+- name: Report status of Phpfpm
+  fail:
+    msg: |
+      Service phpfpm is not running.
+      Return code from `grep`:
+      {{ service_phpfpm_status.rc }}
+  when: service_phpfpm_status.rc != 0
+
+- name: Check if nginx is running
+  shell: ps aux | grep nginx | grep -v grep
+  ignore_errors: yes
+  changed_when: false
+  register: service_nginx_status
+
+- name: Report status of nginx
+  fail:
+    msg: |
+      Service nginx is not running.
+      Return code from `grep`:
+      {{ service_nginx_status.rc }}
+  when: service_nginx_status.rc != 0
 
 - name: monitors - Write monitors
   template:
