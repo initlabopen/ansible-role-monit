@@ -98,7 +98,7 @@ iostat -xk >> /tmp/$STAMP.tmp 2>&1
 echo >> /tmp/$STAMP.tmp
 echo "</pre></p>" >> /tmp/$STAMP.tmp
 
-{% if monit_monitor.stop is defined %}
+{% if service_phpfpm_status.rc == 0 %}
 echo "<h3>Php-fpm for "`cat /root/bin/hr/.address`"</h3>" >> /tmp/$STAMP.tmp
 echo "Command: wget -q -O - "`cat /root/bin/hr/.address`"/status?full" >> /tmp/$STAMP.tmp
 echo "<p><pre>" >> /tmp/$STAMP.tmp
@@ -108,7 +108,7 @@ echo >> /tmp/$STAMP.tmp
 echo "</pre></p>" >> /tmp/$STAMP.tmp
 {% endif %}
 
-{% if monit_monitor.stop is defined %}
+{% if service_nginx_status.rc == 0 %}
 echo "<h3>Nginx</h3>" >> /tmp/$STAMP.tmp
 echo "Command: wget -q -O - http://`cat /root/bin/hr/.address`/nginx_status" >> /tmp/$STAMP.tmp
 echo "<p><pre>" >> /tmp/$STAMP.tmp
