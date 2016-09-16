@@ -3,7 +3,7 @@ monit_pkg:
   - iotop
   - sysstat
 
-monit_email_enable: false
+monit_email_enable: true
 monit_notify_email: "me@localhost"
 
 monit_logfile:  /var/log/monit.log
