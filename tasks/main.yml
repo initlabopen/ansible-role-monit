@@ -88,6 +88,9 @@
 - name: create monitoring folder
   file: path=/root/bin/hr/ state=directory mode=0755
 
+- name: create monitoring log
+  file: path=/var/log/highload-report/ state=directory mode=0755
+
 - name: Copy monitoring script
   template:
     src: highload-report.sh.j2
