@@ -81,7 +81,7 @@
   file:
     path: "{{ monit_includes }}/{{ item }}"
     state: absent
-  with_items: monit_services_present.stdout_lines
+  with_items: "{{ monit_services_present.stdout_lines }}"
   when: monit_service_delete_unlisted and item|basename not in ansible_local.monit.monit_configured_services
   notify: restart monit
 
@@ -95,3 +95,27 @@
     owner: root
     group: root
     mode: 0755
+
+- name: Copy address
+  template:
+    src: .address.j2
+    dest: "/root/bin/hr/.address"
+    owner: root
+    group: root
+    mode: 0600
+
+- name: Copy mysql user
+  template:
+    src: .mysqlu.j2
+    dest: "/root/bin/hr/.mysqlu"
+    owner: root
+    group: root
+    mode: 0600
+
+- name: Copy mysql password
+  template:
+    src: .mysqlp.j2
+    dest: "/root/bin/hr/.mysqlp"
+    owner: root
+    group: root
+    mode: 0600
