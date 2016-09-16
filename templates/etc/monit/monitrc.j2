@@ -17,7 +17,7 @@
 ###############################################################################
 
 set daemon {{monit_poll_period}}
-{% if monit_poll_start_delay is defined %}
+{% if monit_poll_start_delay > 0 %}
   with start delay {{monit_poll_start_delay}}
 {% endif %}
 
@@ -51,7 +51,7 @@ set mail-format {
   set alert {{monit_notify_email}} NOT ON { action, instance, pid, ppid }
 {% else %}
   {% for email in monit_notify_email %}
-    set alert {{email}} NOT ON { action, instance, pid, ppid }
+    set alert {{ email }} NOT ON { action, instance, pid, ppid }
   {% endfor %}
 {% endif %}
 {% endif -%}
