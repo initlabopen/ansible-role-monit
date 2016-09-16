@@ -1,5 +1,5 @@
 {% for user in mysql_users %}
-{% if loop.first }
+{% if loop.first %}
 {{ user.name }}
 {% endif %}
 {% endfor %}
