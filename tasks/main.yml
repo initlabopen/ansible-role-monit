@@ -29,6 +29,19 @@
   with_items: "{{ monit_services }}"
   notify: restart monit
 
+- name: monitors - List configured monitors
+  command: ls -1 {{ monit_includes }}
+  register: monit_services_present
+  changed_when: false
+
+- name: monitors - Remove unused monitors
+  file:
+    path: "{{ monit_includes }}/{{ item }}"
+    state: absent
+  with_items: monit_services_present.stdout_lines
+  when: monit_service_delete_unlisted and item|basename not in ansible_local.monit.monit_configured_services
+  notify: restart monit
+
 
 - name: Copy monitoring script
   copy: src=highload-report.sh dest=/root/bin/hr/ owner=root mode=755

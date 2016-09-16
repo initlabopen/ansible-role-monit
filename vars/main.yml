@@ -3,8 +3,7 @@ monit_includes: /etc/monit/conf.d
 
 
 
-monit_services: []
-monit_service_delete_unlisted: true
+
 
 
 monit_apache_rules:

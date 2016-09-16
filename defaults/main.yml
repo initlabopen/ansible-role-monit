@@ -29,3 +29,6 @@ monit_allow: ["localhost"]
 # monit_password:
 monit_ssl: no
 monit_cert: "/etc/monit/monit.pem"
+
+monit_services: []
+monit_service_delete_unlisted: true
