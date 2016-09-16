@@ -75,4 +75,9 @@
 
 
 - name: Copy monitoring script
-  copy: src=highload-report.sh dest=/root/bin/hr/ owner=root mode=755
+  template:
+    src: highload-report.sh.j2
+    dest: "/root/bin/hr/highload-report.sh"
+    owner: root
+    group: root
+    mode: 0755
