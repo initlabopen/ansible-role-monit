@@ -21,6 +21,24 @@
     mode: 0700
   notify: restart monit
 
+- name: monitors - Create facts directory
+  file:
+    path: "/etc/ansible/facts.d"
+    mode: 0755
+    state: directory
+
+- name: monitors - Registers configured monitors
+  template:
+    src: "monit.fact.j2"
+    dest: "/etc/ansible/facts.d/monit.fact"
+    mode: 0644
+  register: monit_write_facts
+
+- name: monitors - Reload facts
+  setup:
+    filter: "ansible_local"
+  when: monit_write_facts.changed
+
 - name: Check if php-fpm is running
   shell: ps aux | grep php-fpm | grep -v grep
   ignore_errors: yes
