@@ -27,27 +27,11 @@
   changed_when: false
   register: service_phpfpm_status
 
-- name: Report status of Phpfpm
-  fail:
-    msg: |
-      Service phpfpm is not running.
-      Return code from `grep`:
-      {{ service_phpfpm_status.rc }}
-  when: service_phpfpm_status.rc != 0
-
 - name: Check if nginx is running
   shell: ps aux | grep nginx | grep -v grep
   ignore_errors: yes
   changed_when: false
   register: service_nginx_status
-
-- name: Report status of nginx
-  fail:
-    msg: |
-      Service nginx is not running.
-      Return code from `grep`:
-      {{ service_nginx_status.rc }}
-  when: service_nginx_status.rc != 0
 
 - name: monitors - Write monitors
   template:
