@@ -7,7 +7,7 @@
     update_cache: yes
     cache_valid_time: 3600
     state: present
-  with_item: "{{ monit_pkg }}"
+    with_item: "{{ monit_pkg }}"
 
 - name: create includes folder
   file: path={{ monit_includes }} state=directory mode=0600
