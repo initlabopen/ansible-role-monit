@@ -1,3 +1,5 @@
 {% for user in mysql_users %}
+{% if loop.first }
 {{ user.password }}
+{% endif %}
 {% endfor %}
