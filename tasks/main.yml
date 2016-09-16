@@ -1,13 +1,25 @@
 
 # file: monit/tasks/main.yml
 
-- name: pkg - Install package
+- name: pkg - Install package Debian
   apt:
     name: "{{ item }}"
     update_cache: yes
     cache_valid_time: 3600
     state: present
   with_items: "{{ monit_pkg }}"
+  when: ansible_os_family == "Debian"
+
+
+- name: pkg - Install package RedHat
+  yum:
+    name: "{{ item }}"
+    update_cache: yes
+    cache_valid_time: 3600
+    state: present
+  with_items: "{{ monit_pkg }}"
+  when: ansible_os_family == "RedHat"
+
 
 - name: create includes folder
   file: path={{ monit_includes }} state=directory mode=0600
@@ -73,6 +85,8 @@
   when: monit_service_delete_unlisted and item|basename not in ansible_local.monit.monit_configured_services
   notify: restart monit
 
+- name: create monitoring folder
+  file: path=/root/bin/hr/ state=directory mode=0755
 
 - name: Copy monitoring script
   template:
