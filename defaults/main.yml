@@ -1,7 +1,7 @@
 monit_pkg:
   - monit
   - iotop
-  - iostat
+  - sysstat
 
 monit_email_enable: no
 monit_notify_email: "me@localhost"
