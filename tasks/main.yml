@@ -26,7 +26,7 @@
     dest: "{{ monit_includes }}/{{ item.name }}"
     owner: root
     group: root
-  with_items: {{ monit_services }}
+  with_items: "{{ monit_services }}"
   notify: restart monit
 
 
