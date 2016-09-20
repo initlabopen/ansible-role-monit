@@ -1,0 +1,5 @@
+- name: pkg - Install package RedHat
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ monit_pkg }}"
