@@ -15,7 +15,7 @@ monit_eventqueue_enable: yes
 monit_eventqueue_directory: "/var/lib/monit/events"
 monit_eventque_slots: 100
 
-monit_mailformat_from: "monit@{{ ansible_host }}"
+monit_mailformat_from: "monit@{{ ansible_nodename }}"
 monit_mailformat_subject: "$SERVICE $EVENT"
 monit_mailformat_message: "Monit $ACTION $SERVICE at $DATE on $HOST: $DESCRIPTION."
 
