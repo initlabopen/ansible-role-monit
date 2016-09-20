@@ -23,9 +23,11 @@ set daemon {{monit_poll_period}}
 
 set logfile {{monit_logfile}}
 
+{% if ansible_os_family == "Debian" %}
 set idfile /var/lib/monit/id
 
 set statefile /var/lib/monit/state
+{% endif %}
 
 {% if monit_email_enable %}
 set mailserver {{monit_mailserver_host}}{% if monit_mailserver_port is defined %} port {{monit_mailserver_port}}{% endif %}
@@ -186,4 +188,4 @@ set httpd port {{monit_port}}
 ## It is possible to include additional configuration parts from other files or
 ## directories.
 #
-   include /etc/monit/conf.d/*
+   include {{ monit_includes }}*
