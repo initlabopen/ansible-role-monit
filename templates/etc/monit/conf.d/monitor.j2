@@ -5,7 +5,7 @@
 check process {{ monit_monitor.name }} with pidfile {{ monit_monitor.target }}
 {% if monit_monitor.start is defined %}
   start program = "{{ monit_monitor.start }}"
-  
+
   {%- if monit_monitor.user is defined %} as uid {{monit_monitor.user}}{% endif %}
   {%- if monit_monitor.group is defined %} and gid {{monit_monitor.group}}{% endif %}
 {% endif %}
@@ -31,7 +31,7 @@ check host {{ monit_monitor.name }} with address {{ monit_monitor.target }}
 check filesystem {{ monit_monitor.name }} with path {{ monit_monitor.target }}
 {% elif monit_monitor.type == 'file' %}
 check file {{ monit_monitor.name }} with path {{ monit_monitor.target }}
-{% endif -%}
+{% endif %}
 
 {% if monit_monitor.rules is defined %}
 {% for rule in monit_monitor.rules %}
