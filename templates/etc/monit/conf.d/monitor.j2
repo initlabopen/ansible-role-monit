@@ -14,6 +14,12 @@ check process {{ monit_monitor.name }} with pidfile {{ monit_monitor.target }}
   {%- if monit_monitor.user is defined %} as uid {{monit_monitor.user}}{% endif %}
   {%- if monit_monitor.group is defined %} and gid {{monit_monitor.group}}{% endif %}
 {% endif %}
+
+{% if monit_monitor.restart is defined %}
+  restart program = "{{ monit_monitor.restart }}"
+  {%- if monit_monitor.user is defined %} as uid {{monit_monitor.user}}{% endif %}
+  {%- if monit_monitor.group is defined %} and gid {{monit_monitor.group}}{% endif %}
+{% endif %}
 {% elif monit_monitor.type == 'system' %}
 check system {{ monit_monitor.name }}
 {% elif monit_monitor.type == 'host' %}
