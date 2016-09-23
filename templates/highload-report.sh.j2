@@ -134,7 +134,7 @@ netstat -n | egrep '(tcp|udp)' | grep SYN >> /tmp/$STAMP.tmp 2>&1
 echo >> /tmp/$STAMP.tmp
 echo "</pre></p>" >> /tmp/$STAMP.tmp
 
-SUBJECT="`hostname` HighLoad report. Loadavg (5min) more that 13"
+SUBJECT="`hostname` $1"
 
 echo "</body></html>" >> /tmp/$STAMP.tmp
 
