@@ -5,18 +5,21 @@
 check process {{ monit_monitor.name }} with pidfile {{ monit_monitor.target }}
 {% if monit_monitor.start is defined %}
   start program = "{{ monit_monitor.start }}"
+  
   {%- if monit_monitor.user is defined %} as uid {{monit_monitor.user}}{% endif %}
   {%- if monit_monitor.group is defined %} and gid {{monit_monitor.group}}{% endif %}
 {% endif %}
 
 {% if monit_monitor.stop is defined %}
   stop program = "{{ monit_monitor.stop }}"
+
   {%- if monit_monitor.user is defined %} as uid {{monit_monitor.user}}{% endif %}
   {%- if monit_monitor.group is defined %} and gid {{monit_monitor.group}}{% endif %}
 {% endif %}
 
 {% if monit_monitor.restart is defined %}
   restart program = "{{ monit_monitor.restart }}"
+
   {%- if monit_monitor.user is defined %} as uid {{monit_monitor.user}}{% endif %}
   {%- if monit_monitor.group is defined %} and gid {{monit_monitor.group}}{% endif %}
 {% endif %}
