@@ -46,6 +46,12 @@
   changed_when: false
   register: service_phpfpm_status
 
+- name: Check if apache is running
+  shell: ps aux | grep -e apache -e httpd | grep -v grep
+  ignore_errors: yes
+  changed_when: false
+  register: service_apache_status
+
 - name: Check if nginx is running
   shell: ps aux | grep nginx | grep -v grep
   ignore_errors: yes
@@ -88,6 +94,9 @@
     group: root
     mode: 0755
 
+- name: Copy script alert about change passwd
+  action: copy src=../files/change_passwd_root.sh dest=/root/bin/hr/change_passwd_root.sh owner=root group=root mode="744"
+
 - name: Copy address
   template:
     src: .address.j2
@@ -113,7 +122,7 @@
     mode: 0600
 
 
-- name: Restart monit
-  service:
-    name: 'monit'
-    state: 'restarted'
+# - name: Restart monit
+#   service:
+#     name: 'monit'
+#     state: 'restarted'

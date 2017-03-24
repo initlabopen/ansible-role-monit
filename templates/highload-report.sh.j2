@@ -98,12 +98,22 @@ iostat -xk >> /tmp/$STAMP.tmp 2>&1
 echo >> /tmp/$STAMP.tmp
 echo "</pre></p>" >> /tmp/$STAMP.tmp
 
+{% if service_apache_status.rc == 0 %}
+echo "<h3>Apache for "`cat /root/bin/hr/.address`"</h3>" >> /tmp/$STAMP.tmp
+echo "Command: wget -q -O - "`cat /root/bin/hr/.address`"/server-status" >> /tmp/$STAMP.tmp
+echo "<p><pre>" >> /tmp/$STAMP.tmp
+echo >> /tmp/$STAMP.tmp
+wget -q -O - http://`cat /root/bin/hr/.address`/server-status -T 30 >> /tmp/$STAMP.tmp 2>&1
+echo >> /tmp/$STAMP.tmp
+echo "</pre></p>" >> /tmp/$STAMP.tmp
+{% endif %}
+
 {% if service_phpfpm_status.rc == 0 %}
 echo "<h3>Php-fpm for "`cat /root/bin/hr/.address`"</h3>" >> /tmp/$STAMP.tmp
 echo "Command: wget -q -O - "`cat /root/bin/hr/.address`"/status?full" >> /tmp/$STAMP.tmp
 echo "<p><pre>" >> /tmp/$STAMP.tmp
 echo >> /tmp/$STAMP.tmp
-wget -q -O - http://`cat /root/bin/hr/.address`/status?full >> /tmp/$STAMP.tmp 2>&1
+wget -q -O - http://`cat /root/bin/hr/.address`/status?full -T 30 >> /tmp/$STAMP.tmp 2>&1
 echo >> /tmp/$STAMP.tmp
 echo "</pre></p>" >> /tmp/$STAMP.tmp
 {% endif %}
@@ -113,7 +123,7 @@ echo "<h3>Nginx</h3>" >> /tmp/$STAMP.tmp
 echo "Command: wget -q -O - http://`cat /root/bin/hr/.address`/nginx_status" >> /tmp/$STAMP.tmp
 echo "<p><pre>" >> /tmp/$STAMP.tmp
 echo >> /tmp/$STAMP.tmp
-wget -q -O - http://`cat /root/bin/hr/.address`/nginx_status >> /tmp/$STAMP.tmp 2>&1
+wget -q -O - http://`cat /root/bin/hr/.address`/nginx_status -T 30 >> /tmp/$STAMP.tmp 2>&1
 echo >> /tmp/$STAMP.tmp
 echo "</pre></p>" >> /tmp/$STAMP.tmp
 {% endif %}
@@ -140,8 +150,8 @@ echo "</body></html>" >> /tmp/$STAMP.tmp
 
 if [ -n "$REPORT" ]; then
 cat - /tmp/$STAMP.tmp <<EOF | sendmail -oi -t
-To: d.kochetov@initlab.ru
-Cc: r.agabekov@initlab.ru
+To: monitoring@initlab.ru
+#Cc: r.agabekov@initlab.ru
 Subject: $SUBJECT
 Content-Type: text/html; charset=utf8
 Content-Transfer-Encoding: 8bit
