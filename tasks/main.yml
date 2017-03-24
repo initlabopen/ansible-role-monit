@@ -97,29 +97,29 @@
 - name: Copy script alert about change passwd
   action: copy src=../files/change_passwd_root.sh dest=/root/bin/hr/change_passwd_root.sh owner=root group=root mode="744"
 
-- name: Copy address
-  template:
-    src: .address.j2
-    dest: "/root/bin/hr/.address"
-    owner: root
-    group: root
-    mode: 0600
-
-- name: Copy mysql user
-  template:
-    src: .mysqlu.j2
-    dest: "/root/bin/hr/.mysqlu"
-    owner: root
-    group: root
-    mode: 0600
-
-- name: Copy mysql password
-  template:
-    src: .mysqlp.j2
-    dest: "/root/bin/hr/.mysqlp"
-    owner: root
-    group: root
-    mode: 0600
+# - name: Copy address
+#   template:
+#     src: .address.j2
+#     dest: "/root/bin/hr/.address"
+#     owner: root
+#     group: root
+#     mode: 0600
+#
+# - name: Copy mysql user
+#   template:
+#     src: .mysqlu.j2
+#     dest: "/root/bin/hr/.mysqlu"
+#     owner: root
+#     group: root
+#     mode: 0600
+#
+# - name: Copy mysql password
+#   template:
+#     src: .mysqlp.j2
+#     dest: "/root/bin/hr/.mysqlp"
+#     owner: root
+#     group: root
+#     mode: 0600
 
 
 # - name: Restart monit
