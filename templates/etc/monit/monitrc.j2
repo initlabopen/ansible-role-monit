@@ -37,11 +37,11 @@ set mailserver {{monit_mailserver_host}}{% if monit_mailserver_port is defined %
 {% if monit_mailserver_encryption is defined %}  using {{monit_mailserver_encryption}}{{'\n'}}{% endif %}
 {% if monit_mailserver_timeout is defined %}  with timeout {{monit_mailserver_timeout}} seconds{{'\n'}}{% endif %}
 
-{% if monit_eventqueue_enable -%}
+{% if monit_eventqueue_enable %}
 set eventqueue
   basedir {{monit_eventqueue_directory}}
   slots {{monit_eventqueue_slots | default('100')}}
-{% endif -%}
+{% endif %}
 
 set mail-format {
   from: {{monit_mailformat_from}}
