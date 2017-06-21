@@ -150,7 +150,7 @@ echo "</body></html>" >> /tmp/$STAMP.tmp
 
 if [ -n "$REPORT" ]; then
 cat - /tmp/$STAMP.tmp <<EOF | sendmail -oi -t
-To: {% for email in monit_notify_email -%}{{ email }}{% if not loop.last %}, {% endif %}{% if loop.last %}
+To: {% for email in monit_notify_email -%}{{ email }}{% if not loop.last %}, {% endif %}{% if loop.last %} 
 {% endif %}{% endfor %}
 Subject: $SUBJECT
 Content-Type: text/html; charset=utf8
