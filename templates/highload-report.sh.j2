@@ -150,8 +150,7 @@ echo "</body></html>" >> /tmp/$STAMP.tmp
 
 if [ -n "$REPORT" ]; then
 cat - /tmp/$STAMP.tmp <<EOF | sendmail -oi -t
-To: monitoring@initlab.ru
-#Cc: r.agabekov@initlab.ru
+To: {% for email in monit_notify_email%} {{ item }}, {%- endfor %}
 Subject: $SUBJECT
 Content-Type: text/html; charset=utf8
 Content-Transfer-Encoding: 8bit
@@ -163,29 +162,5 @@ fi
 cp /tmp/$STAMP.tmp /var/log/highload-report/$STAMP.log
 rm /tmp/$STAMP.tmp
 find /var/log/highload-report/ -type f -mtime +30 -delete
-
-#if [ "$1" = "apache-start" ]; then
-#    sems=$(ipcs -s | grep apache | awk --source '/0x0*.*[0-9]* .*/ {print $2}')
-#    for sem in $sems
-#    do
-#      ipcrm sem $sem
-#    done
-#    /etc/init.d/httpd start
-#fi
-
-#if [ "$1" = "apache-stop" ]; then
-#    killall -9 httpd
-#fi
-
-#if [ "$1" = "force-restart" ]; then
-#    killall -9 httpd
-#    sleep 2
-#    sems=$(ipcs -s | grep apache | awk --source '/0x0*.*[0-9]* .*/ {print $2}')
-#    for sem in $sems
-#    do
-#      ipcrm sem $sem
-#    done
-#    /etc/init.d/httpd start
-#fi
 
 exit 1
