@@ -37,3 +37,5 @@ monit_cert: "/etc/monit/monit.pem"
 
 monit_services: []
 monit_service_delete_unlisted: true
+
+monit_address_for_report: localhost
