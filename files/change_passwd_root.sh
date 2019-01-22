@@ -1,2 +1,4 @@
 #!/bin/bash
-echo "Change password of root!!!!!!" | mail -s "Change password of root on `hostname`" monitoring@initlab.ru
+
+echo -e "Content-Type: text/plain\r\nTo:  monitoring@initlab.ru\r\nSubject: Change password of root on `hostname`\r\n\r\nChange password of root!!!!!!" | sendmail -v monitoring@initlab.ru
+
