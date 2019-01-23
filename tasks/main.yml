@@ -121,6 +121,14 @@
     group: root
     mode: 0600
 
+- name: Test script change_passwd_root.sh check
+  shell: bash /root/bin/hr/change_passwd_root.sh
+  ignore_errors: yes
+
+
+- name: Test script highload-report.sh check
+  shell: bash /root/bin/hr/highload-report.sh test
+  ignore_errors: yes
 
 # - name: Restart monit
 #   service:
