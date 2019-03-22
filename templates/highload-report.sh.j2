@@ -120,10 +120,10 @@ echo "</pre></p>" >> /tmp/$STAMP.tmp
 
 {% if service_nginx_status.rc == 0 %}
 echo "<h3>Nginx</h3>" >> /tmp/$STAMP.tmp
-echo "Command: wget -q -O - http://`cat /root/bin/hr/.address`/nginx_status" >> /tmp/$STAMP.tmp
+echo "Command: wget -q -O - http://`cat /root/bin/hr/.address`/nginx-status" >> /tmp/$STAMP.tmp
 echo "<p><pre>" >> /tmp/$STAMP.tmp
 echo >> /tmp/$STAMP.tmp
-wget -q -O - http://`cat /root/bin/hr/.address`/nginx_status -T 30 >> /tmp/$STAMP.tmp 2>&1
+wget -q -O - http://`cat /root/bin/hr/.address`/nginx-status -T 30 >> /tmp/$STAMP.tmp 2>&1
 echo >> /tmp/$STAMP.tmp
 echo "</pre></p>" >> /tmp/$STAMP.tmp
 {% endif %}
